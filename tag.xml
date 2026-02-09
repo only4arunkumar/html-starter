@@ -1,0 +1,57 @@
+<VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vast.xsd" version="3.0">
+<Ad id="22806832418">
+<InLine>
+<AdSystem>Vudoo Ads</AdSystem>
+<AdTitle>
+<![CDATA[ Check_VAST_Version ]]>
+</AdTitle>
+<Error>
+<![CDATA[ https://vdar-test.vudoo.io/vast/error/ap-southeast-2/?tag_id=28230269935&embed_id=22806832418&tag_name=VAST_3&tier_group=Buy+Now&embedid=22806832418&key=yeihuush3cheezeeth5vohw0&val=%5BERRORCODE%5D&source_url=%5BSOURCE_URL%5D ]]>
+</Error>
+
+<Creatives>
+<Creative AdID="15897315925">
+<Linear>
+<Duration>00:00:13</Duration>
+
+<AdParameters>{"commerce_external_cart":false,"videos":[{"resolution":"240p","width":426,"height":240,"url":"https:\/\/test-media.vudoo.io\/s3fs-public\/vudoo\/output\/9f1da1-8adb81-6f50ba-951841-2bae39\/109963\/fe596789\/0\/videos\/mp4\/fe596789-0-240p.mp4","orientation":"landscape","type":"video\/mp4","mimetype":"video\/mp4","delivery":"progressive","streamType":"File Stream","attributes":{"maintainAspectRatio":"true"}},{"resolution":"360p","width":640,"height":360,"url":"https:\/\/test-media.vudoo.io\/s3fs-public\/vudoo\/output\/9f1da1-8adb81-6f50ba-951841-2bae39\/109963\/fe596789\/0\/videos\/mp4\/fe596789-0-360p.mp4","orientation":"landscape","type":"video\/mp4","mimetype":"video\/mp4","delivery":"progressive","streamType":"File Stream","attributes":{"maintainAspectRatio":"true"}},{"resolution":"480p","width":854,"height":480,"url":"https:\/\/test-media.vudoo.io\/s3fs-public\/vudoo\/output\/9f1da1-8adb81-6f50ba-951841-2bae39\/109963\/fe596789\/0\/videos\/mp4\/fe596789-0-480p.mp4","orientation":"landscape","type":"video\/mp4","mimetype":"video\/mp4","delivery":"progressive","streamType":"File Stream","attributes":{"maintainAspectRatio":"true"}},{"resolution":"720p","width":1280,"height":720,"url":"https:\/\/test-media.vudoo.io\/s3fs-public\/vudoo\/output\/9f1da1-8adb81-6f50ba-951841-2bae39\/109963\/fe596789\/0\/videos\/mp4\/fe596789-0-720p.mp4","orientation":"landscape","type":"video\/mp4","mimetype":"video\/mp4","delivery":"progressive","streamType":"File Stream","attributes":{"maintainAspectRatio":"true"}}],"campaign_id":"15897315925","skip_visibility":false,"skip_offset":0,"tag_id":"28230269935","embed_id":"22806832418","tracking_providers":[],"ad_tag":{"node_id":"15594","tag_id":"28230269935","tag_name":"VAST_3","tier_group":"Buy Now","format":"CTV","affiliate_tracking_id":"","embed_id":"22806832418","tag_modified":1770596060,"node_modified":1770596060},"embed_source":"CTV","click_tracking_url":"","impression_tracking_url":"","third_party_tracking":[]}</AdParameters>
+<VideoClicks>
+<ClickThrough id="22806832418">
+<![CDATA[ https://test.vudoo.io/apps/url/y3Di7W ]]>
+</ClickThrough>
+<ClickTracking id="22806832418">
+<![CDATA[ https://vdar-test.vudoo.io/vast/click/ap-southeast-2/?tag_id=28230269935&embed_id=22806832418&tag_name=VAST_3&tier_group=Buy+Now&embedid=22806832418&key=yeihuush3cheezeeth5vohw0&val=clickthrough ]]>
+</ClickTracking>
+</VideoClicks>
+<MediaFiles>
+<MediaFile delivery="progressive" width="426" height="240" type="video/mp4" bitrate="303802" scalable="true" maintainAspectRatio="true">
+<![CDATA[ https://test-media.vudoo.io/s3fs-public/vudoo/output/9f1da1-8adb81-6f50ba-951841-2bae39/109963/fe596789/0/videos/mp4/fe596789-0-240p.mp4 ]]>
+</MediaFile>
+<MediaFile delivery="progressive" width="640" height="360" type="video/mp4" bitrate="595301" scalable="true" maintainAspectRatio="true">
+<![CDATA[ https://test-media.vudoo.io/s3fs-public/vudoo/output/9f1da1-8adb81-6f50ba-951841-2bae39/109963/fe596789/0/videos/mp4/fe596789-0-360p.mp4 ]]>
+</MediaFile>
+<MediaFile delivery="progressive" width="854" height="480" type="video/mp4" bitrate="963" scalable="true" maintainAspectRatio="true">
+<![CDATA[ https://test-media.vudoo.io/s3fs-public/vudoo/output/9f1da1-8adb81-6f50ba-951841-2bae39/109963/fe596789/0/videos/mp4/fe596789-0-480p.mp4 ]]>
+</MediaFile>
+<MediaFile delivery="progressive" width="1280" height="720" type="video/mp4" bitrate="1884" scalable="true" maintainAspectRatio="true">
+<![CDATA[ https://test-media.vudoo.io/s3fs-public/vudoo/output/9f1da1-8adb81-6f50ba-951841-2bae39/109963/fe596789/0/videos/mp4/fe596789-0-720p.mp4 ]]>
+</MediaFile>
+</MediaFiles>
+</Linear>
+</Creative>
+<Creative AdID="15897315925">
+<CompanionAds>
+<Companion id="companion-300x250" width="300" height="60">
+<StaticResource creativeType="image/jpeg">
+<![CDATA[ https://fastly.picsum.photos/id/937/300/60.jpg?hmac=V1IjXErmAh9xrULjc6CYw-cPmH6Ujtv36sQy3FsFB7I]]>
+</StaticResource>
+<CompanionClickThrough>
+<![CDATA[ https://test.vudoo.io/apps/url/y3Di7W ]]>
+</CompanionClickThrough>
+</Companion>
+</CompanionAds>
+</Creative>
+</Creatives>
+</InLine>
+</Ad>
+</VAST>
