@@ -23,22 +23,17 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
   <meta name="description" content="Stay informed with the latest breaking news, in-depth analysis, and comprehensive coverage from around the world." />
   <title>Global News - Breaking News &amp; Latest Updates</title>
 
-  <!-- ============================================================
-       GOOGLE TAG MANAGER — replace GTM-XXXXXXX with your container ID
-       ============================================================ -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
-  <!-- End Google Tag Manager -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Reset & tokens ───────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -79,7 +74,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
     img { display: block; width: 100%; object-fit: cover; }
     a   { text-decoration: none; color: inherit; }
 
-    /* ── Top ribbon ───────────────────────────────────────────── */
     .ribbon {
       background: var(--ink);
       color: #fff;
@@ -92,7 +86,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
     }
     .ribbon span { opacity: .55; margin: 0 8px; }
 
-    /* ── Header ───────────────────────────────────────────────── */
     header {
       background: var(--paper);
       border-bottom: 3px double var(--ink);
@@ -135,10 +128,7 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
       margin-bottom: 14px;
     }
 
-    /* ── Nav ─────────────────────────────────────────────────── */
-    nav {
-      border-top: 1px solid var(--rule);
-    }
+    nav { border-top: 1px solid var(--rule); }
     .nav-inner {
       max-width: var(--max-w);
       margin: 0 auto;
@@ -173,14 +163,79 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
     .nav-inner a:hover { color: var(--accent); }
     .nav-inner a:hover::after { transform: scaleX(1); }
 
-    /* ── Layout ──────────────────────────────────────────────── */
+    /* ── Page wrapper: content + vudoo rail ── */
+    .page-wrapper {
+      display: flex;
+      align-items: flex-start;
+      max-width: calc(var(--max-w) + 340px);
+      margin: 0 auto;
+    }
+
+    /* ── Main content column ── */
+    .content-col {
+      flex: 1;
+      min-width: 0;
+    }
+
     main {
       max-width: var(--max-w);
       margin: 0 auto;
       padding: var(--gap) 16px;
     }
 
-    /* ── Hero grid ───────────────────────────────────────────── */
+    /* ── Vudoo rail ── */
+    .vudoo-rail {
+      width: 320px;
+      flex-shrink: 0;
+      padding: var(--gap) 16px var(--gap) 0;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+    }
+
+    .vudoo-rail-label {
+      font-family: var(--ff-sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .vudoo-rail-inner {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      width: 100%;
+      /* maintain 1280:900 ratio for the embed */
+      aspect-ratio: 1280 / 900;
+      position: relative;
+    }
+
+    /* Reset dialog so it behaves as a plain block container */
+    .vudoo-rail-inner dialog {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      aspect-ratio: unset !important;
+      position: absolute !important;
+      inset: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .vudoo-rail-inner iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -242,7 +297,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
     }
     .byline strong { color: var(--ink-mid); font-weight: 600; }
 
-    /* ── Secondary 2-col ──────────────────────────────────────── */
     .secondary-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -268,7 +322,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
     }
     .sec-card p  { font-size: 14px; color: var(--ink-mid); margin-bottom: 12px; }
 
-    /* ── Lower grid ───────────────────────────────────────────── */
     .lower-section {
       margin-top: calc(var(--gap) * 1.5);
       padding-top: calc(var(--gap) * 1.5);
@@ -278,7 +331,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
       gap: var(--gap);
     }
 
-    /* list articles */
     .list-articles { display: flex; flex-direction: column; gap: 20px; }
     .list-card {
       display: grid;
@@ -299,7 +351,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
     }
     .list-card p { font-size: 13px; color: var(--ink-mid); }
 
-    /* sidebar */
     .sidebar { border-left: 1px solid var(--rule); padding-left: var(--gap); }
     .sidebar h4 {
       font-family: var(--ff-sans);
@@ -332,7 +383,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
       margin-top: 4px;
     }
 
-    /* ── Footer ───────────────────────────────────────────────── */
     footer {
       background: var(--ink);
       color: #ccc;
@@ -380,7 +430,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
       color: #555;
     }
 
-    /* ── Animations ───────────────────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -389,7 +438,10 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
     .sec-card:nth-child(1) { animation: fadeUp .6s .1s ease both; }
     .sec-card:nth-child(2) { animation: fadeUp .6s .2s ease both; }
 
-    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .vudoo-rail { display: none; }
+    }
+
     @media (max-width: 768px) {
       .hero-card { grid-template-columns: 1fr; }
       .hero-card img { height: 220px; }
@@ -405,19 +457,13 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
 </head>
 <body>
 
-  <!-- ============================================================
-       GOOGLE TAG MANAGER (noscript) — replace GTM-XXXXXXX below
-       ============================================================ -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
-  <!-- Ribbon -->
   <div class="ribbon">
     Breaking News <span>|</span> World <span>|</span> Politics <span>|</span> Technology <span>|</span> Science <span>|</span> Health
   </div>
 
-  <!-- Header -->
   <header>
     <div class="header-inner">
       <div class="header-top">
@@ -441,110 +487,128 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
     </div>
   </header>
 
-  <!-- Main content -->
-  <main>
+  <!-- Page wrapper splits content and vudoo rail -->
+  <div class="page-wrapper">
 
-    <!-- Hero grid -->
-    <section class="hero-grid">
-      <!-- Hero card -->
-      <article class="hero-card">
-        <img src="https://images.pexels.com/photos/221012/pexels-photo-221012.jpeg" alt="Global Climate Summit" loading="eager" />
-        <div class="card-body">
-          <span class="tag">World</span>
-          <h2>Global Climate Summit Reaches Historic Agreement</h2>
-          <p>World leaders commit to ambitious carbon reduction targets in a landmark environmental pact that redefines international cooperation on the climate crisis.</p>
-          <p class="byline"><strong>Sarah Johnson</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
-        </div>
-      </article>
+    <!-- Main content column (unchanged) -->
+    <div class="content-col">
+      <main>
 
-      <!-- Secondary 2-col inside hero grid -->
-      <div class="secondary-grid" style="grid-column: 1 / -1;">
-        <article class="sec-card">
-          <img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg" alt="AI Safety" loading="lazy" />
-          <div class="card-body">
-            <span class="tag tech">Technology</span>
-            <h3>Tech Giants Announce AI Safety Initiative</h3>
-            <p>Leading technology companies form coalition to establish ethical AI guidelines and shared safety benchmarks.</p>
-            <p class="byline"><strong>Michael Chen</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+        <section class="hero-grid">
+          <article class="hero-card">
+            <img src="https://images.pexels.com/photos/221012/pexels-photo-221012.jpeg" alt="Global Climate Summit" loading="eager" />
+            <div class="card-body">
+              <span class="tag">World</span>
+              <h2>Global Climate Summit Reaches Historic Agreement</h2>
+              <p>World leaders commit to ambitious carbon reduction targets in a landmark environmental pact that redefines international cooperation on the climate crisis.</p>
+              <p class="byline"><strong>Sarah Johnson</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+            </div>
+          </article>
+
+          <div class="secondary-grid" style="grid-column: 1 / -1;">
+            <article class="sec-card">
+              <img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg" alt="AI Safety" loading="lazy" />
+              <div class="card-body">
+                <span class="tag tech">Technology</span>
+                <h3>Tech Giants Announce AI Safety Initiative</h3>
+                <p>Leading technology companies form coalition to establish ethical AI guidelines and shared safety benchmarks.</p>
+                <p class="byline"><strong>Michael Chen</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+              </div>
+            </article>
+
+            <article class="sec-card">
+              <img src="https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg" alt="Cancer Treatment" loading="lazy" />
+              <div class="card-body">
+                <span class="tag health">Health</span>
+                <h3>Medical Breakthrough in Cancer Treatment</h3>
+                <p>Researchers develop a promising new targeted therapy showing remarkable success rates in early-stage clinical trials.</p>
+                <p class="byline"><strong>Dr. Emily Rodriguez</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+              </div>
+            </article>
           </div>
-        </article>
+        </section>
 
-        <article class="sec-card">
-          <img src="https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg" alt="Cancer Treatment" loading="lazy" />
-          <div class="card-body">
-            <span class="tag health">Health</span>
-            <h3>Medical Breakthrough in Cancer Treatment</h3>
-            <p>Researchers develop a promising new targeted therapy showing remarkable success rates in early-stage clinical trials.</p>
-            <p class="byline"><strong>Dr. Emily Rodriguez</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+        <section class="lower-section">
+          <div class="list-articles">
+            <article class="list-card">
+              <img src="https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg" alt="Stock Markets" loading="lazy" />
+              <div>
+                <span class="tag biz" style="font-size:9px;padding:2px 6px;">Business</span>
+                <h3>Stock Markets Rally on Economic Data</h3>
+                <p>Major indices hit record highs as inflation concerns ease and consumer confidence rebounds strongly.</p>
+                <p class="byline" style="margin-top:8px;"><strong>David Thompson</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+              </div>
+            </article>
+
+            <article class="list-card">
+              <img src="https://images.pexels.com/photos/274506/pexels-photo-274506.jpeg" alt="Championship" loading="lazy" />
+              <div>
+                <span class="tag sports" style="font-size:9px;padding:2px 6px;">Sports</span>
+                <h3>Championship Team Clinches Victory</h3>
+                <p>Underdog squad defeats the heavily favoured side in a thrilling final match watched by millions worldwide.</p>
+                <p class="byline" style="margin-top:8px;"><strong>James Martinez</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+              </div>
+            </article>
+
+            <article class="list-card">
+              <img src="https://images.pexels.com/photos/2159/flight-sky-earth-space.jpg" alt="Space Mission" loading="lazy" />
+              <div>
+                <span class="tag science" style="font-size:9px;padding:2px 6px;">Science</span>
+                <h3>New Space Mission Launches Successfully</h3>
+                <p>The ambitious project aims to explore a distant planetary system and collect samples for Earth-based analysis.</p>
+                <p class="byline" style="margin-top:8px;"><strong>Dr. Lisa Anderson</strong> &nbsp;·&nbsp; Oct 11, 2025</p>
+              </div>
+            </article>
           </div>
-        </article>
+
+          <aside class="sidebar">
+            <h4>Most Read</h4>
+            <div class="sidebar-item">
+              <div class="sidebar-num">01</div>
+              <h5>Leaders Reach Breakthrough on Trade Tariff Negotiations</h5>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">02</div>
+              <h5>New Study Links Ultra-Processed Foods to Cognitive Decline</h5>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">03</div>
+              <h5>Central Banks Signal Coordinated Rate Cuts Ahead</h5>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">04</div>
+              <h5>Record-Breaking Heatwave Sweeps Across Southern Europe</h5>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">05</div>
+              <h5>Quantum Computing Firm Achieves Major Processing Milestone</h5>
+            </div>
+          </aside>
+        </section>
+
+      </main>
+    </div><!-- /.content-col -->
+
+    <!-- ── Vudoo rail ─────────────────────────────────────────── -->
+    <aside class="vudoo-rail">
+      <div class="vudoo-rail-label">Sponsored</div>
+      <div class="vudoo-rail-inner">
+        <!--VUDOO EMBED 15165003636-->
+        <dialog style='display:inline-block;width:1280px;max-width:100%;aspect-ratio:1280/900;position:static;padding:0;border:0;margin:0'>
+          <iframe id='vudoo-iframe-15165003636'
+            title='ar_nonstandard_2_39x1_1920x804'
+            src='https://example.vudoo.io/embed/15165003636?tag_id=15164590385&scale_to_fit=0&autoplay=1&inline=0'
+            allow='autoplay; fullscreen; payment; encrypted-media *;'
+            style='display:block;width:100%;height:100%;border:0;'
+            loading='lazy'>
+          </iframe>
+        </dialog>
+        <!--./VUDOO EMBED-->
       </div>
-    </section>
+    </aside>
 
-    <!-- Lower section: list + sidebar -->
-    <section class="lower-section">
-      <div class="list-articles">
-        <article class="list-card">
-          <img src="https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg" alt="Stock Markets" loading="lazy" />
-          <div>
-            <span class="tag biz" style="font-size:9px;padding:2px 6px;">Business</span>
-            <h3>Stock Markets Rally on Economic Data</h3>
-            <p>Major indices hit record highs as inflation concerns ease and consumer confidence rebounds strongly.</p>
-            <p class="byline" style="margin-top:8px;"><strong>David Thompson</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
-          </div>
-        </article>
+  </div><!-- /.page-wrapper -->
 
-        <article class="list-card">
-          <img src="https://images.pexels.com/photos/274506/pexels-photo-274506.jpeg" alt="Championship" loading="lazy" />
-          <div>
-            <span class="tag sports" style="font-size:9px;padding:2px 6px;">Sports</span>
-            <h3>Championship Team Clinches Victory</h3>
-            <p>Underdog squad defeats the heavily favoured side in a thrilling final match watched by millions worldwide.</p>
-            <p class="byline" style="margin-top:8px;"><strong>James Martinez</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
-          </div>
-        </article>
-
-        <article class="list-card">
-          <img src="https://images.pexels.com/photos/2159/flight-sky-earth-space.jpg" alt="Space Mission" loading="lazy" />
-          <div>
-            <span class="tag science" style="font-size:9px;padding:2px 6px;">Science</span>
-            <h3>New Space Mission Launches Successfully</h3>
-            <p>The ambitious project aims to explore a distant planetary system and collect samples for Earth-based analysis.</p>
-            <p class="byline" style="margin-top:8px;"><strong>Dr. Lisa Anderson</strong> &nbsp;·&nbsp; Oct 11, 2025</p>
-          </div>
-        </article>
-      </div>
-
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <h4>Most Read</h4>
-
-        <div class="sidebar-item">
-          <div class="sidebar-num">01</div>
-          <h5>Leaders Reach Breakthrough on Trade Tariff Negotiations</h5>
-        </div>
-        <div class="sidebar-item">
-          <div class="sidebar-num">02</div>
-          <h5>New Study Links Ultra-Processed Foods to Cognitive Decline</h5>
-        </div>
-        <div class="sidebar-item">
-          <div class="sidebar-num">03</div>
-          <h5>Central Banks Signal Coordinated Rate Cuts Ahead</h5>
-        </div>
-        <div class="sidebar-item">
-          <div class="sidebar-num">04</div>
-          <h5>Record-Breaking Heatwave Sweeps Across Southern Europe</h5>
-        </div>
-        <div class="sidebar-item">
-          <div class="sidebar-num">05</div>
-          <h5>Quantum Computing Firm Achieves Major Processing Milestone</h5>
-        </div>
-      </aside>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
@@ -578,7 +642,6 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
   </footer>
 
   <script>
-    // Live date in header
     const d = new Date();
     const days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
