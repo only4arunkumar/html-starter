@@ -185,8 +185,10 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
 
     /* ── Vudoo rail ── */
     .vudoo-rail {
-      width: 320px;
       flex-shrink: 0;
+      /* width is driven by the embed's own max-width:100% + aspect-ratio */
+      width: fit-content;
+      max-width: 400px;
       padding: var(--gap) 16px var(--gap) 0;
       position: sticky;
       top: 0;
@@ -205,28 +207,29 @@ src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
       border-bottom: 2px solid var(--ink);
     }
 
+    /* Wrapper sizes itself to whatever the dialog/iframe actually renders */
     .vudoo-rail-inner {
       background: var(--paper);
       border: 1px solid var(--rule);
       overflow: hidden;
+      /* shrink-wrap around the dialog's natural size */
+      display: inline-block;
       width: 100%;
-      /* maintain 1280:900 ratio for the embed */
-      aspect-ratio: 1280 / 900;
-      position: relative;
     }
 
-    /* Reset dialog so it behaves as a plain block container */
+    /* Let the dialog use its own declared width/aspect-ratio,
+       capped to the rail width via max-width:100% (already on the element) */
     .vudoo-rail-inner dialog {
       display: block !important;
+      /* honour the embed's own aspect-ratio declaration */
+      aspect-ratio: 1280 / 900 !important;
       width: 100% !important;
-      height: 100% !important;
-      aspect-ratio: unset !important;
-      position: absolute !important;
-      inset: 0 !important;
+      max-width: 100% !important;
+      height: auto !important;
+      position: static !important;
       padding: 0 !important;
       border: 0 !important;
       margin: 0 !important;
-      max-width: 100% !important;
     }
 
     .vudoo-rail-inner iframe {
