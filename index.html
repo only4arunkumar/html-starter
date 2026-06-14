@@ -25,8 +25,28 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+    <script src="https://tester-test.vudoo.io/sdk/shoppable/"></script>
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-  <script src="https://tester-test.vudoo.io/sdk/shoppable/"></script>
+   <!-- Load GPT library -->
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+  <script>
+    window.googletag = window.googletag || {cmd: []};
+
+    googletag.cmd.push(function() {
+
+      // Define your ad slot
+      // Format: '/networkCode/adUnitCode', [width, height], 'div-id'
+      googletag.defineSlot('/23279473023/arun_ad_learn_per_site', [300, 600], 'div-gpt-ad-half_page')
+        .addService(googletag.pubads());
+
+      // Enable services
+      googletag.pubads().enableSingleRequest();  // batches all ad requests into one
+      googletag.enableServices();
+
+    });
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Stay informed with the latest breaking news, in-depth analysis, and comprehensive coverage from around the world." />
