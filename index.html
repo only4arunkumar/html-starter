@@ -25,7 +25,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=2788101178231505&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-   
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
   <script src="https://tester-test.vudoo.io/sdk/shoppable/"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -656,6 +656,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.getElementById('js-date').textContent =
       days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
     document.getElementById('js-year').textContent = d.getFullYear();
+  </script>
+
+  <!-- Meta Pixel: listen for vudoo:pixel postMessage events from catalogue.html -->
+  <script>
+    window.addEventListener('message', function(event) {
+      if (!event.data || event.data.type !== 'vudoo:pixel') return;
+      if (typeof fbq !== 'function') return;
+
+      const { track, payload } = event.data;
+
+      if (track.startsWith('custom:')) {
+        fbq('trackCustom', track.replace('custom:', ''), payload);
+      } else {
+        fbq('track', track, payload);
+      }
+    });
   </script>
 
 </body>
