@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+   <!-- Load GPT library -->
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+  <script>
+    window.googletag = window.googletag || {cmd: []};
+
+    googletag.cmd.push(function() {
+
+      // Define your ad slot
+      // Format: '/networkCode/adUnitCode', [width, height], 'div-id'
+      googletag.defineSlot('/23279473023/arun_ad_learn_per_site', [300, 600], 'div-gpt-ad-half_page')
+        .addService(googletag.pubads());
+
+      // Enable services
+      googletag.pubads().enableSingleRequest();  // batches all ad requests into one
+      googletag.enableServices();
+
+    });
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stay informed with the latest breaking news, in-depth analysis, and comprehensive coverage from around the world." />
+  <title>Global News - Breaking News &amp; Latest Updates</title>
+
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0f0e0d;
+      --ink-mid:    #3a3632;
+      --ink-light:  #6b6560;
+      --rule:       #d6d0c8;
+      --bg:         #f5f2ed;
+      --paper:      #faf8f5;
+      --accent:     #b8272c;
+      --accent-lt:  #f0e0e0;
+      --tag-world:  #2563a8;
+      --tag-tech:   #0d7c6e;
+      --tag-health: #7c3a9a;
+      --tag-biz:    #c86000;
+      --tag-sports: #1a7a35;
+      --tag-sci:    #1e5fa0;
+
+      --ff-display: 'Playfair Display', Georgia, serif;
+      --ff-serif:   'Source Serif 4', Georgia, serif;
+      --ff-sans:    'DM Sans', system-ui, sans-serif;
+
+      --max-w: 1200px;
+      --gap: 28px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-serif);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; width: 100%; object-fit: cover; }
+    a   { text-decoration: none; color: inherit; }
+
+    .ribbon {
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--ff-sans);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 6px 16px;
+    }
+    .ribbon span { opacity: .55; margin: 0 8px; }
+
+    header {
+      background: var(--paper);
+      border-bottom: 3px double var(--ink);
+      padding: 20px 16px 0;
+    }
+    .header-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .dateline {
+      font-family: var(--ff-sans);
+      font-size: 12px;
+      color: var(--ink-light);
+      letter-spacing: .06em;
+    }
+    .masthead {
+      font-family: var(--ff-display);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      line-height: 1;
+      text-align: center;
+      flex: 1;
+    }
+    .masthead em { color: var(--accent); font-style: normal; }
+
+    .header-sub {
+      font-family: var(--ff-sans);
+      font-size: 11px;
+      text-align: center;
+      color: var(--ink-light);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    nav { border-top: 1px solid var(--rule); }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-inner a {
+      font-family: var(--ff-sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      white-space: nowrap;
+      position: relative;
+      color: var(--ink-mid);
+      transition: color .2s;
+    }
+    .nav-inner a:first-child { color: var(--accent); }
+    .nav-inner a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 18px; right: 18px;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform .2s;
+    }
+    .nav-inner a:hover { color: var(--accent); }
+    .nav-inner a:hover::after { transform: scaleX(1); }
+
+    /* ── Page wrapper: content + vudoo rail ── */
+    .page-wrapper {
+      display: flex;
+      align-items: flex-start;
+      max-width: calc(var(--max-w) + 340px);
+      margin: 0 auto;
+    }
+
+    /* ── Main content column ── */
+    .content-col {
+      flex: 1;
+      min-width: 0;
+    }
+
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--gap) 16px;
+    }
+
+    /* ── Vudoo rail ── */
+    .vudoo-rail {
+      flex-shrink: 0;
+      /* width is driven by the embed's own max-width:100% + aspect-ratio */
+      width: fit-content;
+      max-width: 400px;
+      padding: var(--gap) 16px var(--gap) 0;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+    }
+
+    .vudoo-rail-label {
+      font-family: var(--ff-sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    /* Wrapper sizes itself to whatever the dialog/iframe actually renders */
+    .vudoo-rail-inner {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      /* shrink-wrap around the dialog's natural size */
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* Let the dialog use its own declared width/aspect-ratio,
+       capped to the rail width via max-width:100% (already on the element) */
+    .vudoo-rail-inner dialog {
+      display: block !important;
+      /* honour the embed's own aspect-ratio declaration */
+      aspect-ratio: 1280 / 900 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      position: static !important;
+      padding: 0 !important;
+      border: 0 !important;
+      margin: 0 !important;
+    }
+
+    .vudoo-rail-inner iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: var(--gap);
+      margin-bottom: calc(var(--gap) * 1.5);
+      padding-bottom: calc(var(--gap) * 1.5);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-card {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      align-items: center;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .hero-card img { height: 340px; }
+    .hero-card .card-body { padding: 32px 32px 32px 0; }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--ff-sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      margin-bottom: 12px;
+      color: #fff;
+      background: var(--tag-world);
+    }
+    .tag.tech    { background: var(--tag-tech); }
+    .tag.health  { background: var(--tag-health); }
+    .tag.biz     { background: var(--tag-biz); }
+    .tag.sports  { background: var(--tag-sports); }
+    .tag.science { background: var(--tag-sci); }
+
+    .hero-card h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero-card p {
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .byline {
+      font-family: var(--ff-sans);
+      font-size: 12px;
+      color: var(--ink-light);
+    }
+    .byline strong { color: var(--ink-mid); font-weight: 600; }
+
+    .secondary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+    }
+    .sec-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .25s;
+    }
+    .sec-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.09); }
+    .sec-card img { height: 200px; }
+    .sec-card .card-body { padding: 20px; flex: 1; }
+    .sec-card h3 {
+      font-family: var(--ff-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .sec-card p  { font-size: 14px; color: var(--ink-mid); margin-bottom: 12px; }
+
+    .lower-section {
+      margin-top: calc(var(--gap) * 1.5);
+      padding-top: calc(var(--gap) * 1.5);
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--gap);
+    }
+
+    .list-articles { display: flex; flex-direction: column; gap: 20px; }
+    .list-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .list-card:last-child { border-bottom: none; }
+    .list-card img { height: 88px; object-fit: cover; flex-shrink: 0; }
+    .list-card h3 {
+      font-family: var(--ff-display);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .list-card p { font-size: 13px; color: var(--ink-mid); }
+
+    .sidebar { border-left: 1px solid var(--rule); padding-left: var(--gap); }
+    .sidebar h4 {
+      font-family: var(--ff-sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .sidebar-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .sidebar-item:last-child { border-bottom: none; }
+    .sidebar-num {
+      font-family: var(--ff-display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--rule);
+      line-height: 1;
+    }
+    .sidebar-item h5 {
+      font-family: var(--ff-serif);
+      font-size: .93rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-top: 4px;
+    }
+
+    footer {
+      background: var(--ink);
+      color: #ccc;
+      margin-top: 60px;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 50px 16px 24px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--gap);
+    }
+    .footer-brand h2 {
+      font-family: var(--ff-display);
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .footer-brand p { font-family: var(--ff-sans); font-size: 13px; line-height: 1.6; }
+    .footer-col h5 {
+      font-family: var(--ff-sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .footer-col a {
+      display: block;
+      font-family: var(--ff-sans);
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 8px;
+      transition: color .2s;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid #2a2925;
+      padding: 16px;
+      text-align: center;
+      font-family: var(--ff-sans);
+      font-size: 12px;
+      color: #555;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-card  { animation: fadeUp .6s ease both; }
+    .sec-card:nth-child(1) { animation: fadeUp .6s .1s ease both; }
+    .sec-card:nth-child(2) { animation: fadeUp .6s .2s ease both; }
+
+    @media (max-width: 1100px) {
+      .vudoo-rail { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-card { grid-template-columns: 1fr; }
+      .hero-card img { height: 220px; }
+      .hero-card .card-body { padding: 20px; }
+      .secondary-grid { grid-template-columns: 1fr; }
+      .lower-section { grid-template-columns: 1fr; }
+      .sidebar { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: var(--gap); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+      .header-top .dateline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="ribbon">
+    Breaking News <span>|</span> World <span>|</span> Politics <span>|</span> Technology <span>|</span> Science <span>|</span> Health
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-top">
+        <span class="dateline" id="js-date">Tuesday, June 2, 2026</span>
+        <h1 class="masthead">Global <em>News</em></h1>
+        <span class="dateline" style="text-align:right;">Edition No. 4,218</span>
+      </div>
+      <p class="header-sub">Your trusted source for breaking news &amp; in-depth analysis</p>
+      <nav>
+        <div class="nav-inner">
+          <a href="#">World</a>
+          <a href="#">Politics</a>
+          <a href="#">Business</a>
+          <a href="#">Technology</a>
+          <a href="#">Science</a>
+          <a href="#">Health</a>
+          <a href="#">Sports</a>
+          <a href="#">Entertainment</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page wrapper splits content and vudoo rail -->
+  <div class="page-wrapper">
+
+    <!-- Main content column (unchanged) -->
+    <div class="content-col">
+      <main>
+
+        <section class="hero-grid">
+          <article class="hero-card">
+            <img src="https://images.pexels.com/photos/221012/pexels-photo-221012.jpeg" alt="Global Climate Summit" loading="eager" />
+            <div class="card-body">
+              <span class="tag">World</span>
+              <h2>Global Climate Summit Reaches Historic Agreement</h2>
+              <p>World leaders commit to ambitious carbon reduction targets in a landmark environmental pact that redefines international cooperation on the climate crisis.</p>
+              <p class="byline"><strong>Sarah Johnson</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+            </div>
+          </article>
+
+          <div class="secondary-grid" style="grid-column: 1 / -1;">
+            <article class="sec-card">
+              <img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg" alt="AI Safety" loading="lazy" />
+              <div class="card-body">
+                <span class="tag tech">Technology</span>
+                <h3>Tech Giants Announce AI Safety Initiative</h3>
+                <p>Leading technology companies form coalition to establish ethical AI guidelines and shared safety benchmarks.</p>
+                <p class="byline"><strong>Michael Chen</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+              </div>
+            </article>
+
+            <article class="sec-card">
+              <img src="https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg" alt="Cancer Treatment" loading="lazy" />
+              <div class="card-body">
+                <span class="tag health">Health</span>
+                <h3>Medical Breakthrough in Cancer Treatment</h3>
+                <p>Researchers develop a promising new targeted therapy showing remarkable success rates in early-stage clinical trials.</p>
+                <p class="byline"><strong>Dr. Emily Rodriguez</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="lower-section">
+          <div class="list-articles">
+            <article class="list-card">
+              <img src="https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg" alt="Stock Markets" loading="lazy" />
+              <div>
+                <span class="tag biz" style="font-size:9px;padding:2px 6px;">Business</span>
+                <h3>Stock Markets Rally on Economic Data</h3>
+                <p>Major indices hit record highs as inflation concerns ease and consumer confidence rebounds strongly.</p>
+                <p class="byline" style="margin-top:8px;"><strong>David Thompson</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+              </div>
+            </article>
+
+            <article class="list-card">
+              <img src="https://images.pexels.com/photos/274506/pexels-photo-274506.jpeg" alt="Championship" loading="lazy" />
+              <div>
+                <span class="tag sports" style="font-size:9px;padding:2px 6px;">Sports</span>
+                <h3>Championship Team Clinches Victory</h3>
+                <p>Underdog squad defeats the heavily favoured side in a thrilling final match watched by millions worldwide.</p>
+                <p class="byline" style="margin-top:8px;"><strong>James Martinez</strong> &nbsp;·&nbsp; Oct 12, 2025</p>
+              </div>
+            </article>
+
+            <article class="list-card">
+              <img src="https://images.pexels.com/photos/2159/flight-sky-earth-space.jpg" alt="Space Mission" loading="lazy" />
+              <div>
+                <span class="tag science" style="font-size:9px;padding:2px 6px;">Science</span>
+                <h3>New Space Mission Launches Successfully</h3>
+                <p>The ambitious project aims to explore a distant planetary system and collect samples for Earth-based analysis.</p>
+                <p class="byline" style="margin-top:8px;"><strong>Dr. Lisa Anderson</strong> &nbsp;·&nbsp; Oct 11, 2025</p>
+              </div>
+            </article>
+          </div>
+
+          <aside class="sidebar">
+            <h4>Most Read</h4>
+            <div class="sidebar-item">
+              <div class="sidebar-num">01</div>
+              <h5>Leaders Reach Breakthrough on Trade Tariff Negotiations</h5>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">02</div>
+              <h5>New Study Links Ultra-Processed Foods to Cognitive Decline</h5>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">03</div>
+              <h5>Central Banks Signal Coordinated Rate Cuts Ahead</h5>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">04</div>
+              <h5>Record-Breaking Heatwave Sweeps Across Southern Europe</h5>
+            </div>
+            <div class="sidebar-item">
+              <div class="sidebar-num">05</div>
+              <h5>Quantum Computing Firm Achieves Major Processing Milestone</h5>
+            </div>
+          </aside>
+        </section>
+
+      </main>
+    </div><!-- /.content-col -->
+
+    <!-- ── Vudoo rail ─────────────────────────────────────────── -->
+    <aside class="vudoo-rail">
+      <div class="vudoo-rail-label">Sponsored</div>
+      <div class="vudoo-rail-inner">
+        <!-- Ad slot container -->
+     <div id='div-gpt-ad-half_page' style='min-width:728px; min-height:90px;'>
+        <script>
+        googletag.cmd.push(function() {
+        googletag.display('div-gpt-ad-half_page');
+     });
+    </script>
+
+
+   
+  </div>
+      </div>
+    </aside>
+
+  </div><!-- /.page-wrapper -->
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h2>Global News</h2>
+        <p>Your trusted source for breaking news and in-depth analysis from around the world. Independent. Accurate. Accountable.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Sections</h5>
+        <a href="#">World</a>
+        <a href="#">Politics</a>
+        <a href="#">Business</a>
+        <a href="#">Technology</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">Careers</a>
+        <a href="#">Advertise</a>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="js-year">2026</span> Global News. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const d = new Date();
+    const days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('js-date').textContent =
+      days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    document.getElementById('js-year').textContent = d.getFullYear();
+  </script>
+
+
+</body>
+</html>
