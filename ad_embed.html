@@ -1,0 +1,190 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Ad Unit</title>
+
+  <!-- Meta Pixel — loaded directly in the ad iframe, no parent page needed -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    const META_PIXEL_ID = "2788101178231505"; // ← replace with your Pixel ID
+    fbq('init', META_PIXEL_ID);
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
+  </noscript>
+
+    <script type="module">
+      /**
+       * Vudoo Shoppable SDK has to be imported upfront on page load
+       */
+      import {
+        createShoppableApp,
+        onShoppableAppClose,
+        onEvent,
+        openShoppableCataloguePage,
+      } from "https://test.vudoo.io/sdk/shoppable"; // replace the URL with your own region
+
+      const tagId = "99190624914"; // replace with your own tagId
+
+      // Initialize the shoppable app, ensure this is called on page load
+      const app = createShoppableApp({
+        tagId, // required
+        // campaignId: "campaignId",
+        // lineItemId: "lineItemId",
+        // orderId: "orderId",
+        // previewMode: false, // If true, no analytics events will be sent
+        // If true, analytics tracking will be sent to third party tracking providers
+        supportThirdPartyTracking: true
+      
+      });
+
+      const container = document.getElementById("shoppable-app-container");
+      const { iframe } = app;
+      iframe.classList.add("shoppable-iframe");
+
+      function hideShoppableIframe() {
+        iframe.classList.add("shoppable-iframe-hidden");
+        iframe.classList.remove("shoppable-iframe-open");
+      }
+
+      function showShoppableIframe() {
+        iframe.classList.add("shoppable-iframe-open");
+        iframe.classList.remove("shoppable-iframe-hidden");
+      }
+
+      document.getElementById("my-button").addEventListener("click", () => {
+        console.info('ad clicked');
+        // Ensure the iframe is only added to the DOM once by checking `iframe.isConnected`
+        if (!iframe.isConnected) {
+          container.appendChild(iframe);
+        }
+        // Toggle the iframe visibility
+        showShoppableIframe()
+
+        // Open the shoppable catalogue or product page
+        openShoppableCataloguePage(app);
+      })
+
+      onShoppableAppClose(app, () => {
+        // After the cross button is clicked, hide the iFrame by toggling opacity rather than removing it from the DOM
+        hideShoppableIframe()
+      })
+
+      // --- Fire Meta Pixel events directly from the ad iframe ---
+      onEvent(app, (event) => {
+        const { eventName, data } = event;
+
+        let pixelMessage = null;
+     console.info(`shoppable event -${eventName}`);
+        switch (eventName) {
+
+          // Product page entered → ViewContent
+          case "page-enter": {
+            const { pageType, product } = data ?? {};
+            if (pageType === "product" && product) {
+              pixelMessage = {
+                type:      "vudoo:pixel",
+                track:     "ViewContent",
+                payload: {
+                  content_ids:  [product.id ?? product.sku],
+                  content_name: product.title,
+                  content_type: "product",
+                  value:        product.price,
+                  currency:     product.currency ?? "AUD",
+                },
+              };
+            } else if (pageType === "cart") {
+              // Cart page entered → InitiateCheckout
+              pixelMessage = { type: "vudoo:pixel", track: "InitiateCheckout", payload: {} };
+            }
+            break;
+          }
+
+          // Item added to cart → AddToCart
+          case "add-to-cart": {
+            const { product } = data ?? {};
+            pixelMessage = {
+              type:    "vudoo:pixel",
+              track:   "AddToCart",
+              payload: {
+                content_ids:  [product?.id ?? product?.sku],
+                content_name: product?.title,
+                content_type: "product",
+                value:        product?.price,
+                currency:     product?.currency ?? "AUD",
+              },
+            };
+            break;
+          }
+
+          // Checkout completed → Purchase
+          case "checkout-complete": {
+            const { status, orderId, total, currency } = data ?? {};
+            if (status === "success") {
+              pixelMessage = {
+                type:    "vudoo:pixel",
+                track:   "Purchase",
+                payload: { order_id: orderId, value: total, currency: currency ?? "AUD" },
+              };
+            }
+            break;
+          }
+
+          // First meaningful engagement → ViewContent
+          case "shoppable-engaged": {
+            pixelMessage = { type: "vudoo:pixel", track: "ViewContent", payload: { content_type: "shoppable_ad" } };
+            break;
+          }
+        }
+
+        if (pixelMessage) {
+          fbq('track', pixelMessage.track, pixelMessage.payload);
+        }
+      });
+    </script>
+      <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .shoppable-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        position: absolute;
+        top: 0;
+      }
+      .shoppable-iframe-open {
+        opacity: 1;
+        z-index: 1;
+      }
+      .shoppable-iframe-hidden {
+        opacity: 0;
+        z-index: -1;
+      }
+      #shoppable-app-container {
+        width: 600px;
+        aspect-ratio: 1 / 2;
+      }
+    </style>
+  </head>
+  <body>
+  <div style="display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 16px; width: 300px; height: 600px; background-color: #f0f0f0;" id="shoppable-app-container">
+      <button id="my-button" style="padding: 8px 16px; background: red; color: #FFFFFF; font-weight: 700; cursor: pointer;">View catalogue</button>
+    <div style="display:none" > %%CLICK_URL_UNESC%%</div>
+    </div>
+  </body>
+  </html>
