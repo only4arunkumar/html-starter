@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ad Unit</title>
+
+<!-- Pinterest Tag — loaded directly in the ad iframe, no parent page needed -->
+<script>
+!function(e){if(!window.pintrk){window.pintrk = function () {
+window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
+  n=window.pintrk;n.queue=[],n.version="3.0";var
+  t=document.createElement("script");t.async=!0,t.src=e;var
+  r=document.getElementsByTagName("script")[0];
+  r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+
+const PINTEREST_TAG_ID = "2614207617708"; // ← replace with your Tag ID
+pintrk('load', PINTEREST_TAG_ID, {em: '<user_email_address>'}); // replace with hashed/user email if available
+pintrk('page');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt=""
+  src="https://ct.pinterest.com/v3/?event=init&tid=2614207617708&pd[em]=<hashed_email_address>&noscript=1" />
+</noscript>
+<!-- end Pinterest Tag -->
+
+  <script type="module">
+    /**
+     * Vudoo Shoppable SDK has to be imported upfront on page load
+     */
+    import {
+      createShoppableApp,
+      onShoppableAppClose,
+      onEvent,
+      openShoppableCataloguePage,
+    } from "https://test.vudoo.io/sdk/shoppable"; // replace the URL with your own region
+
+    const tagId = "99190624914"; // replace with your own tagId
+
+    // Initialize the shoppable app, ensure this is called on page load
+    const app = createShoppableApp({
+      tagId, // required
+      // campaignId: "campaignId",
+      // lineItemId: "lineItemId",
+      // orderId: "orderId",
+      // previewMode: false, // If true, no analytics events will be sent
+      // If true, analytics tracking will be sent to third party tracking providers
+      supportThirdPartyTracking: true
+
+    });
+
+    const container = document.getElementById("shoppable-app-container");
+    const { iframe } = app;
+    iframe.classList.add("shoppable-iframe");
+
+    function hideShoppableIframe() {
+      iframe.classList.add("shoppable-iframe-hidden");
+      iframe.classList.remove("shoppable-iframe-open");
+    }
+
+    function showShoppableIframe() {
+      iframe.classList.add("shoppable-iframe-open");
+      iframe.classList.remove("shoppable-iframe-hidden");
+    }
+
+    document.getElementById("my-button").addEventListener("click", () => {
+      console.info('ad clicked');
+      // Ensure the iframe is only added to the DOM once by checking `iframe.isConnected`
+      if (!iframe.isConnected) {
+        container.appendChild(iframe);
+      }
+      // Toggle the iframe visibility
+      showShoppableIframe()
+
+      // Open the shoppable catalogue or product page
+      openShoppableCataloguePage(app);
+    })
+
+    onShoppableAppClose(app, () => {
+      // After the cross button is clicked, hide the iFrame by toggling opacity rather than removing it from the DOM
+      hideShoppableIframe()
+    })
+
+    // --- Fire Pinterest Tag events directly from the ad iframe ---
+    //
+    // Note: Pinterest's standard event taxonomy is different from Meta's.
+    // Pinterest standard events: AddToCart, Checkout, Lead, PageVisit,
+    // Search, SignUp, ViewCategory, WatchVideo, Custom.
+    // There is no exact 1:1 match for Meta's "InitiateCheckout" or generic
+    // "ViewContent", so those are mapped to the closest Pinterest equivalent
+    // below (PageVisit) — adjust the mapping if Pinterest later gives you a
+    // better fit for your funnel.
+    onEvent(app, (event) => {
+      const { eventName, data } = event;
+
+      let pixelMessage = null;
+      console.info(`shoppable event -${eventName}`);
+      switch (eventName) {
+
+        // Product page entered → PageVisit (closest analog to ViewContent)
+        case "page-enter": {
+          const { pageType, product } = data ?? {};
+          if (pageType === "product" && product) {
+            pixelMessage = {
+              type:    "vudoo:pixel",
+              track:   "PageVisit",
+              payload: {
+                line_items: [{
+                  product_id:   product.id ?? product.sku,
+                  product_name: product.title,
+                  product_price: product.price,
+                }],
+                value:    product.price,
+                currency: product.currency ?? "AUD",
+              },
+            };
+          } else if (pageType === "cart") {
+            // Cart page entered → no direct Pinterest equivalent, use Custom
+            pixelMessage = {
+              type:    "vudoo:pixel",
+              track:   "Custom",
+              payload: { event_name: "InitiateCheckout" },
+            };
+          }
+          break;
+        }
+
+        // Item added to cart → AddToCart
+        case "add-to-cart": {
+          const { product } = data ?? {};
+          pixelMessage = {
+            type:    "vudoo:pixel",
+            track:   "AddToCart",
+            payload: {
+              line_items: [{
+                product_id:   product?.id ?? product?.sku,
+                product_name: product?.title,
+                product_price: product?.price,
+              }],
+              value:    product?.price,
+              currency: product?.currency ?? "AUD",
+            },
+          };
+          break;
+        }
+
+        // Checkout completed → Checkout
+        case "checkout-complete": {
+          const { status, orderId, total, currency } = data ?? {};
+          if (status === "success") {
+            pixelMessage = {
+              type:    "vudoo:pixel",
+              track:   "Checkout",
+              payload: {
+                order_id: orderId,
+                value:    total,
+                currency: currency ?? "AUD",
+              },
+            };
+          }
+          break;
+        }
+
+        // First meaningful engagement → PageVisit
+        case "shoppable-engaged": {
+          pixelMessage = {
+            type:    "vudoo:pixel",
+            track:   "PageVisit",
+            payload: { event_name: "shoppable_ad_engaged" },
+          };
+          break;
+        }
+      }
+
+      if (pixelMessage) {
+        pintrk('track', pixelMessage.track, pixelMessage.payload);
+      }
+    });
+  </script>
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .shoppable-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      position: absolute;
+      top: 0;
+    }
+    .shoppable-iframe-open {
+      opacity: 1;
+      z-index: 1;
+    }
+    .shoppable-iframe-hidden {
+      opacity: 0;
+      z-index: -1;
+    }
+    #shoppable-app-container {
+      width: 600px;
+      aspect-ratio: 1 / 2;
+    }
+  </style>
+</head>
+<body>
+<div style="display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 16px; width: 300px; height: 600px; background-color: #f0f0f0;" id="shoppable-app-container">
+    <button id="my-button" style="padding: 8px 16px; background: red; color: #FFFFFF; font-weight: 700; cursor: pointer;">View catalogue</button>
+  <div style="display:none" > %%CLICK_URL_UNESC%%</div>
+  </div>
+</body>
+</html>
