@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Publisher - Catalogue</title>
+</head>
+<body>
+<h1>Publisher website Pinterest</h1>
+  <iframe src="./pinterest_embed.html" width="300" height="600" style="border:none;"></iframe>
+</body>
+</html>
