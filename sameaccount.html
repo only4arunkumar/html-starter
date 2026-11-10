@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tropeaka AA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #1d1d1b;
+      --ink-soft: #5c5a56;
+      --bg:       #fbf8f4;
+      --blush:    #f3dcd3;
+      --lilac:    #e4dcef;
+      --sage:     #dfe8dc;
+      --line:     #e8e2da;
+      --ff: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html, body { min-height: 100%; }
+    body {
+      font-family: var(--ff);
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    /* Header */
+    header {
+      padding: calc(18px + env(safe-area-inset-top, 0px)) 20px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      text-align: center;
+    }
+    .brand {
+      font-weight: 500;
+      font-size: 1.15rem;
+      letter-spacing: .32em;
+      text-transform: lowercase;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(40px, 8vw, 88px) 20px clamp(28px, 5vw, 48px);
+      text-align: center;
+    }
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      z-index: 0;
+    }
+    .hero::before { width: 420px; height: 420px; background: var(--blush); top: -220px; left: -140px; }
+    .hero::after  { width: 360px; height: 360px; background: var(--lilac); bottom: -240px; right: -120px; }
+    .hero > * { position: relative; z-index: 1; }
+
+    h1 {
+      font-weight: 300;
+      font-size: clamp(2.6rem, 9vw, 5.2rem);
+      letter-spacing: -.02em;
+      line-height: 1;
+    }
+    .hero p {
+      margin: 16px auto 0;
+      max-width: 34ch;
+      font-size: clamp(1rem, 2.4vw, 1.15rem);
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* Video embed */
+    .embed-wrap {
+      padding: 0 20px clamp(48px, 8vw, 96px);
+      display: flex;
+      justify-content: center;
+    }
+    .embed-card {
+      width: 100%;
+      max-width: 740px;  /* 720px frame + 10px padding each side */
+      background: #fff;
+      padding: 10px;
+      border-radius: 18px;
+      box-shadow: 0 1px 0 var(--line), 0 18px 40px -24px rgba(29, 29, 27, .35);
+    }
+    .embed-frame {
+      display: block;
+      width: 100%;
+      aspect-ratio: 720 / 405;
+      height: auto;
+      border: 0;
+      border-radius: 10px;
+      background: var(--sage);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="brand">tropeaka</span>
+  </header>
+
+  <section class="hero">
+    <h1>Tropeaka AA</h1>
+    <p>Clean nutrition for everyday wellness.</p>
+  </section>
+
+  <section class="embed-wrap">
+    <div class="embed-card">
+      <iframe
+        class="embed-frame"
+        title="Tropeaka 16-9_2"
+        width="720" height="405"
+        allow="autoplay; fullscreen; payment; encrypted-media *"
+        allowfullscreen
+        srcdoc="<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width,initial-scale=1'><style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:transparent}dialog{width:100%!important;height:100%}</style></head><body><!--VUDOO EMBED 47806941272--><dialog style='display:inline-block;width:720px;max-width:100%;aspect-ratio:720/405;position:static;padding:0;border:0;margin:0'><iframe id='vudoo-iframe-47806941272' title='Tropeaka 16-9_2' src='https://test-vs5596.vudoo.io/embed/47806941272?tag_id=47776166321&amp;scale_to_fit=0&amp;autoplay=1&amp;inline=0' allow='autoplay; fullscreen; payment; encrypted-media *;' style='display:block;width:100%;height:100%;border:0;' loading='lazy'></iframe></dialog><!--./VUDOO EMBED--></body></html>">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>&copy; Tropeaka AA test page</footer>
+
+</body>
+</html>
