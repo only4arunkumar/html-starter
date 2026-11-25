@@ -423,9 +423,9 @@
     //   - when the slot first came into view
     // and gives a verdict: deferred until scroll (lazy OK) vs. loaded without scrolling (eager).
     // Everything is also logged to the console with the prefix [lazy-check].
-    // Hide the panel with ?debug=0 (logging still runs).
+    // The panel is shown only with ?lazyCheck=1 in the URL (console logging always runs).
     (function () {
-      var showPanel = !/[?&]debug=0\b/.test(location.search);
+      var showPanel = new URLSearchParams(location.search).get('lazyCheck') === '1';
       var vh = function () { return window.innerHeight; };
       var now = function () { return Math.round(performance.now()); };
 
