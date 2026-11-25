@@ -102,17 +102,59 @@
       font-size: 21px; font-style: italic;
     }
 
-    /* Embedded aps.html */
+    /* Embedded ad frames (aps.html, aps_landscape.html) */
     .embed-wrap { margin: 28px 0; }
     .embed-label {
       font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
       text-align: center; margin-bottom: 6px;
     }
-    #aps-frame {
-      display: block; margin: 0 auto; border: 0;
-      width: 320px; height: 760px;   /* fallback; JS sets exact content size when same-origin */
-      max-width: 100%;
+    /* .ad-box is sized by JS to the (scaled) ad size; the iframe inside keeps the ad's native size */
+    .ad-box { position: relative; margin: 0 auto; overflow: hidden; }
+    .ad-frame {
+      display: block; border: 0; position: absolute; top: 0; left: 0;
+      transform-origin: 0 0;
     }
+
+    /* Full-width landscape ad slot */
+    .landscape-slot {
+      background: var(--soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 20px var(--gutter) 28px;
+    }
+    .landscape-slot .embed-wrap { margin: 0 auto; max-width: 1306px; }
+
+    /* Latest-news feed (filler content so the landscape ad starts well below the fold) */
+    .feed { max-width: 1180px; margin: 0 auto; padding: 8px var(--gutter) 40px; }
+    .feed > h3 {
+      font-size: 14px; text-transform: uppercase; letter-spacing: 1px;
+      border-bottom: 2px solid var(--text); padding-bottom: 6px; margin: 0 0 8px;
+    }
+    .story {
+      display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 20px;
+      padding: 20px 0; border-bottom: 1px solid var(--line);
+    }
+    .story .thumb { aspect-ratio: 4/3; border-radius: 4px; background: #d9dde2; }
+    .story:nth-child(3n) .thumb { background: #cfd8cf; }
+    .story:nth-child(3n+1) .thumb { background: #e2d6cc; }
+    .story .tag { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+    .story h4 { font-size: 21px; line-height: 1.25; margin: 4px 0 8px; }
+    .story p { margin: 0; color: #444; font-size: 16px; }
+    .story .meta { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+    /* Lazy-load debug panel */
+    #lazy-debug {
+      position: fixed; right: 12px; bottom: 12px; z-index: 50;
+      background: rgba(26,26,26,.92); color: #fff; border-radius: 6px;
+      font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace;
+      padding: 8px 10px; max-width: min(360px, calc(100vw - 24px));
+      max-height: 45vh; overflow: auto;
+    }
+    #lazy-debug b { color: #9fd3ff; font-weight: 600; }
+    #lazy-debug .on { color: #7ee787; }
+    #lazy-debug .off { color: #ffa198; }
+    #lazy-debug button {
+      background: none; border: 0; color: #aaa; cursor: pointer; float: right; margin-left: 8px; font: inherit;
+    }
+    #lazy-debug.min .rows { display: none; }
 
     aside.rail { width: 320px; }
     .rail-block { margin-bottom: 28px; }
@@ -152,6 +194,8 @@
       aside.rail { width: 100%; }
       .rail .ad-slot { max-width: 300px; margin: 0 auto; }
       .cards { grid-template-columns: repeat(2, 1fr); }
+      .story { grid-template-columns: 160px minmax(0, 1fr); gap: 14px; }
+      .story h4 { font-size: 18px; }
     }
     /* Phone */
     @media (max-width: 600px) {
@@ -165,8 +209,12 @@
       blockquote { font-size: 18px; }
       .cards { grid-template-columns: 1fr 1fr; gap: 14px; }
       .card h4 { font-size: 14px; }
+      .story { grid-template-columns: 110px minmax(0, 1fr); gap: 12px; padding: 14px 0; }
+      .story h4 { font-size: 16px; margin-bottom: 0; }
+      .story p { display: none; }
+      .landscape-slot { padding-left: 0; padding-right: 0; }
       /* Let the embed bleed into the side gutters so the 300px unit fits on 320px phones */
-      .embed-wrap { margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); }
+      article .embed-wrap { margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); }
     }
   </style>
 </head>
@@ -219,10 +267,16 @@
       <p>Executive sedans have spent the past decade fighting for attention against a wave of SUVs. This latest model doesn't try to out-shout them — instead it doubles down on what made the class great: refinement, poise, and a sense of occasion every time you open the door.</p>
       <p>Over two days and roughly 600 kilometres, we drove it through city traffic, winding mountain roads and long motorway stretches to find out whether it lives up to the hype.</p>
 
-      <div class="embed-wrap">
-        <div class="embed-label sans">Advertisement</div>
-        <iframe id="aps-frame" src="aps.html" title="Sponsored content" scrolling="no" loading="lazy"></iframe>
-      </div>
+      <h2>Design</h2>
+      <p>From the outside, the changes are more evolutionary than revolutionary. The grille is slimmer, the headlights sharper, and a new full-width light bar spans the boot lid. It's handsome rather than dramatic — the kind of design that should age well over a typical four-year ownership cycle.</p>
+      <p>Look closer and the details reward attention. Flush door handles pop out as you approach, the side mirrors have been reshaped to cut wind noise, and the wheel designs have been optimised for aerodynamics without looking like dinner plates.</p>
+      <p>The drag coefficient has fallen to 0.23, which the engineers say is worth around 20 km of extra electric range on a motorway run. It's also visibly lower and wider than before, with a stance that finally matches its price tag.</p>
+
+      <h2>Technology</h2>
+      <p>The infotainment system runs on a new operating system that boots almost instantly and responds without lag. Wireless smartphone mirroring is standard, and over-the-air updates mean features can be added long after you drive off the forecourt.</p>
+      <p>Driver-assistance systems have been upgraded too. Adaptive cruise control now handles stop-start traffic more smoothly, and the lane-centring assistant no longer ping-pongs between the white lines on gently curving roads.</p>
+      <p>A head-up display projects navigation arrows onto the road ahead, and an optional augmented-reality mode overlays turn instructions on the live camera feed. It sounds gimmicky, but in an unfamiliar city it genuinely helps.</p>
+      <p>The audio system deserves a special mention. Eighteen speakers, carefully tuned to the cabin's acoustics, deliver a crisp, balanced sound that rivals dedicated home systems — and thanks to the cabin's quietness, you can actually hear it.</p>
 
       <h2>Inside the cabin</h2>
       <p>The interior is a clear step forward. A single curved display spans most of the dash, yet physical controls remain for climate and volume — a welcome concession. Materials feel expensive where your hands land, and rear-seat space is generous enough for adults on long trips.</p>
@@ -232,6 +286,18 @@
       <h2>On the road</h2>
       <p>Steering is light around town but builds weight naturally as speeds rise. The adaptive suspension soaks up broken surfaces without the float that plagued its predecessor, and body control on twisting roads is genuinely impressive for a car of this size.</p>
       <p>The plug-in hybrid powertrain delivers a usable electric-only range for most commutes, switching seamlessly to petrol when needed. Over our mixed test loop we averaged better economy than the official figure suggests.</p>
+
+      <div class="embed-wrap">
+        <div class="embed-label sans">Advertisement</div>
+        <div class="ad-box">
+          <iframe class="ad-frame" id="aps-frame" data-label="aps.html (300x600)" data-w="316" data-h="616"
+                  src="aps.html" title="Sponsored content" scrolling="no" loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <h2>Running costs</h2>
+      <p>Servicing intervals have been stretched to every 30,000 km or two years, and the manufacturer's fixed-price plan keeps budgeting simple. Insurance groups are broadly in line with rivals, while the plug-in hybrid's low official emissions keep company-car tax pleasantly modest.</p>
+      <p>Charge at home overnight and most weekday commutes can be done without burning a drop of fuel. On longer trips, expect real-world economy in the mid-40s mpg once the battery is depleted.</p>
 
       <h2>Verdict</h2>
       <p>If you've written off sedans, this might change your mind. It's comfortable, efficient and quietly confident — exactly what a daily driver should be.</p>
@@ -257,6 +323,32 @@
     </aside>
   </main>
 
+  <!-- Filler feed: pushes the landscape ad well below the fold so lazy loading can be observed -->
+  <section class="feed sans">
+    <h3>Latest news</h3>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">News</div><h4>Fuel prices dip for the third straight week</h4><p>Analysts say a softer oil market and a stronger currency are behind the drop, but warn it may not last into the new year.</p><div class="meta">2 hours ago</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">Electric</div><h4>New fast-charging corridor opens along the coast</h4><p>Forty new 350kW chargers now line the busiest holiday route, cutting typical charging stops to under twenty minutes.</p><div class="meta">3 hours ago</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">Reviews</div><h4>Compact crossover tested: big on space, light on thrills</h4><p>It's practical and well-priced, but rivals offer a more engaging drive for similar money.</p><div class="meta">5 hours ago</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">Tech</div><h4>Your next car's key might live entirely on your phone</h4><p>Digital keys are moving from luxury models into mainstream hatchbacks. Here's what changes for owners.</p><div class="meta">6 hours ago</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">Motorsport</div><h4>Rookie takes surprise pole in the season finale</h4><p>A wet qualifying session turned the grid upside down, setting up a tense championship decider.</p><div class="meta">8 hours ago</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">Buying Guide</div><h4>Should you buy a nearly-new EV in 2027?</h4><p>Depreciation has made used electric cars a bargain — but battery health checks are essential.</p><div class="meta">10 hours ago</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">Opinion</div><h4>Speed cameras aren't the enemy. Bad road design is</h4><p>Our columnist argues that enforcement is a symptom, not a cure, for dangerous streets.</p><div class="meta">12 hours ago</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">News</div><h4>Recall issued for 40,000 SUVs over seatbelt sensor fault</h4><p>Owners will be contacted by dealers; the fix takes around an hour and is free of charge.</p><div class="meta">14 hours ago</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">Electric</div><h4>Solid-state batteries: when will they actually arrive?</h4><p>We asked five engineers for a realistic timeline. Their answers were surprisingly consistent.</p><div class="meta">Yesterday</div></div></a>
+    <a href="#" class="story"><div class="thumb"></div><div><div class="tag">Reviews</div><h4>Long-term test: the family estate after 20,000 km</h4><p>Ten months in, the boot is still its best feature — but the infotainment has tested our patience.</p><div class="meta">Yesterday</div></div></a>
+  </section>
+
+  <!-- Landscape ad slot (aps_landscape.html) — only reached after scrolling -->
+  <section class="landscape-slot" id="landscape-slot">
+    <div class="embed-wrap">
+      <div class="embed-label sans">Advertisement</div>
+      <div class="ad-box">
+        <iframe class="ad-frame" id="aps-landscape-frame" data-label="aps_landscape.html (1290x1080)" data-w="1306" data-h="1096"
+                src="aps_landscape.html" title="Sponsored content" scrolling="no" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
   <section class="related sans">
     <h3>More from The Daily Drive</h3>
     <div class="cards">
@@ -278,30 +370,197 @@
     document.getElementById('today').textContent =
       new Date().toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
-    // Size the iframe to exactly match aps.html's rendered content.
-    // Works when both pages are served from the same origin (e.g. a local web server).
-    // Under file:// most browsers block access, so the CSS fallback size (320x760) is used.
-    (function () {
-      var frame = document.getElementById('aps-frame');
-      function fit() {
-        try {
-          var doc = frame.contentDocument;
-          if (!doc || !doc.body) return;
-          var de = doc.documentElement;
-          var w = Math.max(de.scrollWidth, doc.body.scrollWidth);
-          var h = Math.max(de.scrollHeight, doc.body.scrollHeight);
-          frame.style.width = w + 'px';
-          frame.style.height = h + 'px';
-        } catch (e) { /* cross-origin: keep fallback size */ }
-      }
+    // ---- Ad frame sizing -------------------------------------------------
+    // Each .ad-frame renders its page at the page's native size (measured from the
+    // iframe's document when same-origin, otherwise data-w / data-h). If the slot is
+    // narrower than the ad, the frame is scaled down uniformly so the slot keeps the
+    // ad's exact aspect ratio instead of cropping it.
+    var frames = Array.prototype.slice.call(document.querySelectorAll('.ad-frame'));
+
+    function measure(frame) {
+      try {
+        var doc = frame.contentDocument;
+        if (!doc || !doc.body || !doc.body.firstElementChild) return;
+        var de = doc.documentElement;
+        frame.dataset.w = Math.max(de.scrollWidth, doc.body.scrollWidth);
+        frame.dataset.h = Math.max(de.scrollHeight, doc.body.scrollHeight);
+      } catch (e) { /* cross-origin / file:// — keep data-w / data-h */ }
+    }
+
+    function layout(frame) {
+      var w = +frame.dataset.w, h = +frame.dataset.h;
+      var box = frame.parentNode;
+      var avail = box.parentNode.clientWidth;
+      var scale = Math.min(1, avail / w);
+      frame.style.width = w + 'px';
+      frame.style.height = h + 'px';
+      frame.style.transform = scale < 1 ? 'scale(' + scale + ')' : '';
+      box.style.width = Math.floor(w * scale) + 'px';
+      box.style.height = Math.floor(h * scale) + 'px';
+      frame.dataset.scale = scale.toFixed(3);
+    }
+
+    function layoutAll() { frames.forEach(layout); }
+
+    frames.forEach(function (frame) {
+      layout(frame); // reserve the slot at its fallback size before the ad loads
       frame.addEventListener('load', function () {
-        fit();
+        measure(frame);
+        layout(frame);
         try {
-          var doc = frame.contentDocument;
-          if (window.ResizeObserver && doc) new ResizeObserver(fit).observe(doc.body);
+          if (window.ResizeObserver) new ResizeObserver(function () { measure(frame); layout(frame); })
+            .observe(frame.contentDocument.body);
         } catch (e) {}
       });
-      window.addEventListener('resize', fit);
+    });
+    window.addEventListener('resize', layoutAll);
+
+    // ---- Lazy-load check ------------------------------------------------------
+    // For each ad slot it tracks:
+    //   - how far below the fold the slot started on page load
+    //   - when the slot's iframe (aps*.html) loaded, and how far from the viewport it was then
+    //   - when the Vudoo embed inside it was requested / finished loading (same-origin only)
+    //   - when the slot first came into view
+    // and gives a verdict: deferred until scroll (lazy OK) vs. loaded without scrolling (eager).
+    // Everything is also logged to the console with the prefix [lazy-check].
+    // Hide the panel with ?debug=0 (logging still runs).
+    (function () {
+      var showPanel = !/[?&]debug=0\b/.test(location.search);
+      var vh = function () { return window.innerHeight; };
+      var now = function () { return Math.round(performance.now()); };
+
+      // Scroll history so we can tell where the user was at any past moment.
+      var scrollLog = [{ t: 0, y: window.scrollY }];
+      var userScrolled = false;
+      window.addEventListener('scroll', function () {
+        userScrolled = true;
+        scrollLog.push({ t: performance.now(), y: window.scrollY });
+      }, { passive: true });
+      function scrollAt(t) {
+        var y = scrollLog[0].y;
+        for (var i = 0; i < scrollLog.length && scrollLog[i].t <= t; i++) y = scrollLog[i].y;
+        return y;
+      }
+      function slotTop(frame) { return frame.parentNode.getBoundingClientRect().top + window.scrollY; }
+      // px between the bottom of the viewport and the top of the slot at time t (positive = still below the fold)
+      function distAt(frame, t) { return Math.round(slotTop(frame) - (scrollAt(t) + vh())); }
+      function fmtDist(d) { return d > 0 ? d + 'px below fold' : 'in/above view'; }
+
+      var panel, rowsEl;
+      if (showPanel) {
+        panel = document.createElement('div');
+        panel.id = 'lazy-debug';
+        panel.innerHTML = '<button title="Collapse">–</button><strong>Ad lazy-load check</strong><div class="rows"></div>';
+        document.body.appendChild(panel);
+        panel.querySelector('button').onclick = function () { panel.classList.toggle('min'); };
+        rowsEl = panel.querySelector('.rows');
+      }
+
+      frames.forEach(function (frame) {
+        var label = frame.dataset.label;
+        var st = {
+          startDist: null,     // slot distance below fold on first render
+          frameLoad: null,     // { t, d } aps*.html document loaded
+          embedReq: null,      // { t, d } first request to a Vudoo host triggered — drives the verdict
+          embedLoad: null,     // { t, d } Vudoo embed finished loading
+          firstSeen: null,     // t
+          visible: false
+        };
+        var row;
+        if (showPanel) { row = document.createElement('div'); row.style.marginTop = '6px'; rowsEl.appendChild(row); }
+
+        function log(msg) { console.log('[lazy-check] ' + label + ': ' + msg); }
+        function mark(key, t) {
+          if (st[key]) return;
+          st[key] = { t: Math.round(t), d: distAt(frame, t) };
+          log(key + ' at ' + st[key].t + 'ms (' + fmtDist(st[key].d) + ', scrollY ' + Math.round(scrollAt(t)) + ')');
+          render();
+        }
+
+        function verdict() {
+          // Decided ONLY by when the first request to Vudoo was triggered.
+          var ev = st.embedReq;
+          if (st.startDist <= 0) return ['info', 'slot visible on load — lazy test N/A'];
+          if (st.noInspect) return ['info', 'cannot see Vudoo calls (serve over http, same origin)'];
+          if (!ev) return ['ok', 'Vudoo not called yet — waiting for scroll ✓'];
+          var scrolledBefore = scrollAt(ev.t - 1) > 0;
+          if (!scrolledBefore) return ['bad', 'Vudoo called without scrolling ✗ (eager)'];
+          return ['ok', 'Vudoo called after scroll ✓ (' + fmtDist(ev.d) + ')'];
+        }
+
+        function cell(x) { return x ? '<span class="on">' + x.t + 'ms</span> · ' + fmtDist(x.d) : '<span class="off">not yet</span>'; }
+        function render() {
+          if (!row) return;
+          var v = verdict();
+          var cls = v[0] === 'bad' ? 'off' : v[0] === 'ok' ? 'on' : '';
+          row.innerHTML = '<b>' + label + '</b><br>' +
+            'start: ' + (st.startDist == null ? '–' : fmtDist(st.startDist)) + '<br>' +
+            'frame loaded: ' + cell(st.frameLoad) + '<br>' +
+            'Vudoo call triggered: ' + cell(st.embedReq) + '<br>' +
+            (st.vudooUrl ? '&nbsp;&nbsp;↳ <span style="opacity:.7">' + st.vudooUrl + '</span><br>' : '') +
+            'Vudoo embed loaded: ' + cell(st.embedLoad) + '<br>' +
+            'in view: ' + (st.visible ? '<span class="on">yes</span>' : '<span class="off">no</span>') +
+            (st.firstSeen != null ? ' (first ' + st.firstSeen + 'ms)' : '') + '<br>' +
+            'verdict: <span class="' + cls + '">' + v[1] + '</span>';
+        }
+
+        // Initial position (after layout has reserved the slot size)
+        requestAnimationFrame(function () {
+          st.startDist = distAt(frame, 0);
+          log('starts ' + fmtDist(st.startDist) + ' (viewport ' + vh() + 'px)');
+          render();
+        });
+
+        frame.addEventListener('load', function () {
+          mark('frameLoad', performance.now());
+          // Look inside the ad page for the Vudoo embed iframe (same-origin only).
+          try {
+            var win = frame.contentWindow, doc = frame.contentDocument;
+            var offset = win.performance.timeOrigin - performance.timeOrigin; // child clock -> our clock
+            var isVudoo = function (name) {
+              try { return /(^|\.)vudoo\.(io|com)$/i.test(new URL(name).hostname); } catch (e) { return false; }
+            };
+            // Any request from the ad page to a Vudoo host. Resource Timing gives the exact moment the
+            // request was triggered (startTime), even though the entry is delivered when it completes.
+            // buffered:true also picks up calls made before this observer was attached.
+            if (win.PerformanceObserver) {
+              new win.PerformanceObserver(function (list) {
+                list.getEntries().filter(function (e) { return isVudoo(e.name); })
+                  .sort(function (a, b) { return a.startTime - b.startTime; })
+                  .forEach(function (e) {
+                    var t = e.startTime + offset;
+                    if (!st.embedReq || t < st.embedReq.t) {
+                      st.embedReq = null;            // keep the earliest call
+                      st.vudooUrl = e.name.split('?')[0];
+                      mark('embedReq', t);
+                    }
+                    if (/\/embed\//.test(e.name)) mark('embedLoad', e.responseEnd + offset);
+                  });
+              }).observe({ type: 'resource', buffered: true });
+            }
+            // Load event of the inner iframe (fires if it loads after we attach, i.e. it was deferred)
+            var inner = doc.querySelector('iframe[id^="vudoo-iframe-"], iframe');
+            if (inner) inner.addEventListener('load', function () { mark('embedLoad', performance.now()); });
+          } catch (e) {
+            st.noInspect = true; render();
+            log('cannot inspect Vudoo calls (cross-origin / file://) — serve the folder over http');
+          }
+        });
+
+        if (window.IntersectionObserver) {
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              st.visible = e.isIntersecting;
+              if (e.isIntersecting && st.firstSeen == null) {
+                st.firstSeen = now();
+                log('first in view at ' + st.firstSeen + 'ms');
+              }
+              render();
+            });
+          }).observe(frame.parentNode);
+        }
+        render();
+      });
     })();
   </script>
 </body>
